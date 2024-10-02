@@ -5,6 +5,8 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	// "os"
 	"os/exec"
 
 	"github.com/spf13/cobra"
@@ -25,8 +27,14 @@ to quickly create a Cobra application.`,
 			panic("empty args")
 		}
 		cm := exec.Command("journalctl", "-fu", args[0], "-o", "cat")
+		cm.Stdout = os.Stdout
+		cm.Stderr = os.Stderr
 		fmt.Println(cm.String())
-		err := cm.Run()
+		err := cm.Start()
+		if err != nil {
+			panic(err)
+		}
+		err = cm.Wait()
 		if err != nil {
 			panic(err)
 		}

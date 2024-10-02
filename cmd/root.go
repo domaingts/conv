@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	version = "v0.0.2"
-	v bool
+	Version = "unknown"
+	v       bool
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -27,7 +27,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if v {
-			fmt.Printf("conv %s\n", version)
+			fmt.Printf("conv %s\n", Version)
 		}
 	},
 }
@@ -44,5 +44,3 @@ func Execute() {
 func init() {
 	rootCmd.Flags().BoolVarP(&v, "version", "v", false, "The version of conv")
 }
-
-
